@@ -15,6 +15,8 @@ public class MainMenu extends JPanel implements ActionListener {
 	private GameWindow window;
 	
 	public MainMenu(GameWindow window) {
+		
+		// TODO: Make this look better
 		this.window = window;
 		setLayout(null);
 		

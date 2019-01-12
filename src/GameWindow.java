@@ -286,5 +286,13 @@ public class GameWindow extends JFrame implements ActionListener {
 		else if (evt.getSource() == evidenceItem) {
 			switchScreen("Evidence");
 		}
+		
+		// Game menu
+		if (evt.getSource() == quitItem) {
+			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to quit? You will lose all unsaved data.", "Warning", JOptionPane.YES_NO_OPTION);
+			
+			if (confirm == JOptionPane.YES_OPTION)
+				switchScreen("MainMenu");
+		}
 	}
 }
