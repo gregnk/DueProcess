@@ -109,13 +109,13 @@ public class GameWindow extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	public void switchScreen(String switchToScreen) {
+	public void switchScreen(String screenName) {
 		
 		// Remove current screen
 		remove(currentScreen);
 		
 		// Construct the next scene
-		switch (switchToScreen) {
+		switch (screenName) {
 		case "MainMenu":
 			mainMenuScreen = new MainMenu(this);
 			currentScreen = mainMenuScreen;
@@ -138,12 +138,16 @@ public class GameWindow extends JFrame implements ActionListener {
 			caseInfoScreen = new CaseInfo(currentCase.getCaseInfo(), this);
 			currentScreen = caseInfoScreen;
 			break;
+		case "Witnesses":
+			witnessScreen = new WitnessesScreen(currentCase.getWitnesses());
+			currentScreen = witnessScreen;
+			break;
 		case "InputTest":
 			inputTest = new InputTest();
 			currentScreen = inputTest;
 			break;
 		default:
-			System.err.println("Invalid screen");
+			System.err.printf("Invalid screen (%s)\n", screenName);
 			break;
 		}
 		
@@ -200,6 +204,19 @@ public class GameWindow extends JFrame implements ActionListener {
 		}
 		
 		currentCase.setCaseInfo(caseInfoText);
+		file.close();
+		
+		// Load witnesses
+		file = new Scanner(new File("data/cases/" + currentCase.getCaseName() + "/Witnesses.csv"));
+		file.useDelimiter(",");
+		
+		ArrayList<Witness> witnesses = new ArrayList<Witness>();
+		
+		while (file.hasNext()) {
+			witnesses.add(new Witness(file.next(), file.next(), file.next()));
+		}
+		
+		currentCase.setWitnesses(witnesses);
 		
 		System.out.println(currentCase.toString());
 		
