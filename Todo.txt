@@ -1,0 +1,13 @@
+CHECKLIST
+===============
+
+Todo:
+
+Done (Unpolished):
+* Main Menu
+* Enter name
+* Intro
+* Case Info
+
+Done:
+* Input processing
