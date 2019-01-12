@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Evidence extends JLabel {
+public class Evidence {
 	private String name;
 	private String desc;
 	private ImageIcon icon;
