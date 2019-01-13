@@ -15,8 +15,6 @@ public class EvidenceScreen extends JPanel implements ActionListener {
 
 		setLayout(null);
 
-		this.evidence = evidence;
-
 		// Add header
 		header.setBounds(10, 10, 755, 20);
 		add(header);
