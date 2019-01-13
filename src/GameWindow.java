@@ -58,7 +58,8 @@ public class GameWindow extends JFrame implements ActionListener {
 		setLocationRelativeTo(null); // Center on screen
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		setResizable(false);
+		
 		// Build menu bar
 		caseMenu.add(trialItem);
 		caseMenu.add(caseInfoItem);
