@@ -1,1 +1,1 @@
-Warning: There is a lot of shitty code here, so I would advise you to stay out of here.
+Warning: There is a lot of shitty code here, so I would advise you to stay out.
