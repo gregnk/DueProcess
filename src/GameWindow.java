@@ -33,6 +33,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	private JMenu caseMenu = new JMenu("Case");
 	private JMenuItem trialItem = new JMenuItem("Trial");
 	private JMenuItem caseInfoItem = new JMenuItem("Case Info");
+	private JMenuItem notesItem = new JMenuItem("Notes");
 	private JMenuItem witnessesItem = new JMenuItem("Witnesses");
 	private JMenuItem evidenceItem = new JMenuItem("Evidence");
 	private JMenuItem lawDBItem = new JMenuItem("Law Database");
@@ -63,6 +64,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		// Build menu bar
 		caseMenu.add(trialItem);
 		caseMenu.add(caseInfoItem);
+		caseMenu.add(notesItem);
 		caseMenu.add(witnessesItem);
 		caseMenu.add(evidenceItem);
 		caseMenu.add(lawDBItem);
@@ -77,6 +79,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		// Add menu bar action listeners
 		trialItem.addActionListener(this);
 		caseInfoItem.addActionListener(this);
+		notesItem.addActionListener(this);
 		witnessesItem.addActionListener(this);
 		evidenceItem.addActionListener(this);
 		lawDBItem.addActionListener(this);
@@ -146,6 +149,14 @@ public class GameWindow extends JFrame implements ActionListener {
 		case "Evidence":
 			evidenceScreen = new EvidenceScreen(currentCase.getEvidence());
 			currentScreen = evidenceScreen;
+			break;
+		case "Notes":
+			ArrayList<String> testNotes = new ArrayList<String>();
+			testNotes.add("12123123");
+			testNotes.add("nadisfneawijj");
+			
+			notesScreen = new Notes(testNotes, this);
+			currentScreen = notesScreen;
 			break;
 		case "InputTest":
 			inputTest = new InputTest();
@@ -238,8 +249,6 @@ public class GameWindow extends JFrame implements ActionListener {
 		file.close();
 
 		System.out.println(currentCase.toString());
-
-
 	}	
 
 	public void displayMenuBar() {
@@ -286,6 +295,10 @@ public class GameWindow extends JFrame implements ActionListener {
 		
 		else if (evt.getSource() == evidenceItem) {
 			switchScreen("Evidence");
+		}
+		
+		else if (evt.getSource() == notesItem) {
+			switchScreen("Notes");
 		}
 		
 		// Game menu

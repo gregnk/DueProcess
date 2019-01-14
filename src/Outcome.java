@@ -14,7 +14,10 @@ public class Outcome {
 	
 	// Next dialog part to load
 	private String nextDialog;
-
+	
+	// The outcomes score
+	private double score = 0;
+	
 	public ArrayList<String> getKeywords1() {
 		return keywords1;
 	}
@@ -37,14 +40,6 @@ public class Outcome {
 
 	public void setKeywords3(ArrayList<String> keywords3) {
 		this.keywords3 = keywords3;
-	}
-
-	public String getNextDialog() {
-		return nextDialog;
-	}
-
-	public void setNextDialog(String nextDialog) {
-		this.nextDialog = nextDialog;
 	}
 
 	public ArrayList<Double> getKeywords1Scores() {
@@ -71,6 +66,29 @@ public class Outcome {
 		this.keywords3Scores = keywords3Scores;
 	}
 
+	public String getNextDialog() {
+		return nextDialog;
+	}
+
+	public void setNextDialog(String nextDialog) {
+		this.nextDialog = nextDialog;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+	
+	@Override
+	public String toString() {
+		return "Outcome [keywords1=" + keywords1 + ", keywords2=" + keywords2 + ", keywords3=" + keywords3
+				+ ", keywords1Scores=" + keywords1Scores + ", keywords2Scores=" + keywords2Scores + ", keywords3Scores="
+				+ keywords3Scores + ", nextDialog=" + nextDialog + ", score=" + score + "]";
+	}
+	
 	public Outcome(String nextDialog) {
 		this.nextDialog = nextDialog;
 	}
@@ -91,15 +109,4 @@ public class Outcome {
 			break;
 		}
 	}
-	
-	@Override
-	public String toString() {
-		return "Outcome [keywords1=" + keywords1 + ", keywords2=" + keywords2 + ", keywords3=" + keywords3
-				+ ", keywords1Scores=" + keywords1Scores + ", keywords2Scores=" + keywords2Scores + ", keywords3Scores="
-				+ keywords3Scores + ", nextDialog=" + nextDialog + "]";
-	}
-
-	
-	
-	
 }
