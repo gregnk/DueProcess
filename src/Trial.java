@@ -10,7 +10,7 @@ public class Trial extends JPanel implements ActionListener {
 
 	// List of previous game dialog
 	private JLabel log = new JLabel("<html><body style='width: 755px;'>");
-	private JScrollPane logPane = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	private JScrollPane logPane = new JScrollPane(log, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 	// User input
 	private JTextField inputResponse = new JTextField();
