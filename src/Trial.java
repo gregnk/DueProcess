@@ -150,10 +150,22 @@ public class Trial extends JPanel implements ActionListener {
 		outcomesFile.close();
 
 		// Load default responses
-
+		Scanner defaultResponseFile;
+		
+		if (folder.equals(""))
+			defaultResponseFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/DefaultResponse.csv"));
+		else
+			defaultResponseFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/DefaultResponse.csv"));
+		
+		defaultResponseFile.useDelimiter(",");
+		
 		// Profane response (The user entered profanity into to their response)
-
-		// Nonsense response (What the user entered did not make any sense)
+		profaneResponse = defaultResponseFile.next();
+		
+		// Nonsense response (What the user entered did reach the score threshold and therefore did not make any sense)
+		nonsenseResponse = defaultResponseFile.next();
+		
+		defaultResponseFile.close();
 	}
 
 	public void submitResponse(String response) {
@@ -195,9 +207,13 @@ public class Trial extends JPanel implements ActionListener {
 		// Display the next part of the dialog
 		log.setText(log.getText() + dialog.get(++part) + "<br>");
 
-		// Allow user input once done
+		// Done with dialog
 		if (part == dialog.size() - 1) {
+			
+			// Enable user input
 			enableInput();
+			
+			// Add notes
 		}
 
 		repaint();
