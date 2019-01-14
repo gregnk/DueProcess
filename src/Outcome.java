@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Outcome {
+public class Outcome implements Comparable {
 	
 	// Keywords (different lengths)
 	private ArrayList<String> keywords1 = new ArrayList<String>();
@@ -108,5 +108,11 @@ public class Outcome {
 			keywords3Scores.add(score);
 			break;
 		}
+	}
+
+	@Override
+	public int compareTo(Object outcome) {
+		double compareScore = ((Outcome)outcome).getScore();
+		return (int) (compareScore - score);
 	}
 }

@@ -22,6 +22,14 @@ public class Trial extends JPanel implements ActionListener {
 	// List of possible outcomes
 	private ArrayList<Outcome> outcomes = new ArrayList<Outcome>();
 
+	// Score thresholds
+	private double scoreThreshold;
+
+	// Default responses
+	private String emptyResponse;
+	private String profaneResponse;
+	private String nonsenseResponse;
+
 	// Proceed/Submit response button
 	private JButton proceedButton = new JButton("Continue");
 
@@ -73,13 +81,13 @@ public class Trial extends JPanel implements ActionListener {
 			dialogFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/Dialog.csv"));
 		else
 			dialogFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Dialog.csv"));
-		
+
 		dialogFile.useDelimiter(",");
 
 		// Reset dialog array
 		dialog = new ArrayList<String>();
 		part = 0;
-		
+
 		// Load dialog into the array
 		while(dialogFile.hasNext())
 			dialog.add(dialogFile.next());
@@ -100,6 +108,9 @@ public class Trial extends JPanel implements ActionListener {
 
 		outcomesFile.useDelimiter(",");
 
+		// Load score threshold
+		scoreThreshold = outcomesFile.nextDouble();
+
 		// Clear outcomes array
 		outcomes = new ArrayList<Outcome>();
 
@@ -119,63 +130,65 @@ public class Trial extends JPanel implements ActionListener {
 				String keyword = keywordsFile.next();
 				keyword = keyword.replace("\r", "");
 				keyword = keyword.replace("\n", "");
-				
+
 				// Check if we are at the end of the line
 				if (keyword.equals("__END")) {
 					// End of line, increase words
 					words++;
 				}
-				
+
 				// If not, add the keyword
 				else {
 					double score = keywordsFile.nextDouble();
 					outcome.addKeyword(keyword, score, words);
 				}
 			}
-			
+
 			keywordsFile.close();
 		}
 
 		outcomesFile.close();
 
+		// Load default responses
+
+		// Profane response (The user entered profanity into to their response)
+
+		// Nonsense response (What the user entered did not make any sense)
 	}
 
 	public void submitResponse(String response) {
 		
-		// Generate the score for each outcome
-		for (Outcome outcome : outcomes) {
-			double score = 0;
-			
-			for (int words = 1; words <= 3; words++)
-				score += (double) WordParser.generateOutcomeScore(response.split(" "), outcome, words);
-			
-			outcome.setScore(score);
+		// Check if the user entered something
+		if (!response.equals("")) {
+
+
+			// Generate the score for each outcome
+			for (Outcome outcome : outcomes) {
+				double score = 0;
+
+				for (int words = 1; words <= 3; words++)
+					score += (double) WordParser.generateOutcomeScore(response.split(" "), outcome, words);
+
+				outcome.setScore(score);
+			}
+
+			// Sort the outcomes by score
+			Collections.sort(outcomes);
+
+			for  (Outcome outcome : outcomes) {
+				System.out.println(outcome.toString());
+			}
+
+			// Load the outcome with the highest score
+			try {
+				loadDialog(outcomes.get(0).getNextDialog());
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			// Disable user input
+			disableInput();
 		}
-		
-		// Sort the outcomes by score
-		Collections.sort(outcomes, new Comparator<Outcome>() {
-	        @Override
-	        public int compare(Outcome outcome1, Outcome outcome2)
-	        {
-	        	Double score1 = outcome1.getScore();
-	        	Double score2 = outcome2.getScore();
-	        	
-	            return score1.compareTo(score2);
-	        }
-	    });
-		
-		for  (Outcome outcome : outcomes) {
-			System.out.println(outcome.toString());
-		}
-		
-		// Load the outcome with the highest score
-		try {
-			loadDialog(outcomes.get(0).getNextDialog());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		canInput = false;
 	}
 
 	public void proceed() {
@@ -184,9 +197,7 @@ public class Trial extends JPanel implements ActionListener {
 
 		// Allow user input once done
 		if (part == dialog.size() - 1) {
-			canInput = true;
-			inputResponse.setEnabled(true);
-			proceedButton.setText("Submit");
+			enableInput();
 		}
 
 		repaint();
@@ -200,5 +211,17 @@ public class Trial extends JPanel implements ActionListener {
 			else
 				proceed();
 		}
+	}
+	
+	private void enableInput() {
+		canInput = true;
+		inputResponse.setEnabled(true);
+		proceedButton.setText("Submit");
+	}
+	
+	private void disableInput() {
+		canInput = false;
+		inputResponse.setEnabled(false);
+		proceedButton.setText("Continue");
 	}
 }
