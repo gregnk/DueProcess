@@ -114,6 +114,10 @@ public class GameWindow extends JFrame implements ActionListener {
 	}
 
 	public void switchScreen(String screenName) {
+		switchScreen(screenName, false);
+	}
+	
+	public void switchScreen(String screenName, boolean reset) {
 
 		// Remove current screen
 		remove(currentScreen);
@@ -121,33 +125,33 @@ public class GameWindow extends JFrame implements ActionListener {
 		// Construct the next scene
 		switch (screenName) {
 		case "MainMenu":
-			mainMenuScreen = new MainMenu(this);
+			if (reset || mainMenuScreen == null) mainMenuScreen = new MainMenu(this);
 			currentScreen = mainMenuScreen;
 			break;
 		case "EnterName":
-			enterNameScreen = new EnterName(this);
+			if (reset || enterNameScreen == null) enterNameScreen = new EnterName(this);
 			currentScreen = enterNameScreen;
 			break;
 		case "Trial":
-			trialScreen = new Trial(currentCase, this);
+			if (reset || trialScreen == null) trialScreen = new Trial(currentCase, this);
 			currentScreen = trialScreen;
 			break;
 		case "Intro":
-			introScreen = new Intro(currentCase.getIntroText(), this);
+			if (reset || introScreen == null) introScreen = new Intro(currentCase.getIntroText(), this);
 			currentScreen = introScreen;
 			break;
 		case "GameEnd":
 			break;
 		case "CaseInfo":
-			caseInfoScreen = new CaseInfo(currentCase.getCaseInfo(), this);
+			if (reset || caseInfoScreen == null) caseInfoScreen = new CaseInfo(currentCase.getCaseInfo(), this);
 			currentScreen = caseInfoScreen;
 			break;
 		case "Witnesses":
-			witnessScreen = new WitnessesScreen(currentCase.getWitnesses());
+			if (reset || witnessScreen == null) witnessScreen = new WitnessesScreen(currentCase.getWitnesses());
 			currentScreen = witnessScreen;
 			break;
 		case "Evidence":
-			evidenceScreen = new EvidenceScreen(currentCase.getEvidence());
+			if (reset || evidenceScreen == null) evidenceScreen = new EvidenceScreen(currentCase.getEvidence());
 			currentScreen = evidenceScreen;
 			break;
 		case "Notes":
@@ -155,7 +159,7 @@ public class GameWindow extends JFrame implements ActionListener {
 			testNotes.add("12123123");
 			testNotes.add("nadisfneawijj");
 			
-			notesScreen = new Notes(testNotes, this);
+			if (reset || notesScreen == null) notesScreen = new Notes(testNotes, this);
 			currentScreen = notesScreen;
 			break;
 		case "InputTest":
