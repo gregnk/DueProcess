@@ -249,7 +249,7 @@ public class Trial extends JPanel implements ActionListener {
 
 		for (String word : response) {
 			for (String profanity : profanities) {
-				if (response.equals(profanity))
+				if (word.equals(profanity))
 					return true;
 			}
 		}
