@@ -203,6 +203,9 @@ public class Trial extends JPanel implements ActionListener {
 			//				return;
 			//			}
 
+			// Add the response to the log
+			log.setText(log.getText() + response + "<br>");
+			
 			// Generate the score for each outcome
 			for (Outcome outcome : outcomes) {
 				double score = 0;
