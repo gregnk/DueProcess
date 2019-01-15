@@ -155,11 +155,7 @@ public class GameWindow extends JFrame implements ActionListener {
 			currentScreen = evidenceScreen;
 			break;
 		case "Notes":
-			ArrayList<String> testNotes = new ArrayList<String>();
-			testNotes.add("12123123");
-			testNotes.add("nadisfneawijj");
-			
-			if (reset || notesScreen == null) notesScreen = new Notes(testNotes, this);
+			if (reset || notesScreen == null) notesScreen = new Notes(currentCase.getNotes(), this);
 			currentScreen = notesScreen;
 			break;
 		case "InputTest":

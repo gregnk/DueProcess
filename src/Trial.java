@@ -22,12 +22,15 @@ public class Trial extends JPanel implements ActionListener {
 	// List of possible outcomes
 	private ArrayList<Outcome> outcomes = new ArrayList<Outcome>();
 
-	// Score thresholds
+	// Score threshold
 	private double scoreThreshold;
 
 	// Default outcomes
 	private String nonsenseOutcome;
 
+	// Notes to be added at the end of the dialog
+	private ArrayList<String> notes;
+	
 	// Proceed/Submit response button
 	private JButton proceedButton = new JButton("Continue");
 
@@ -164,6 +167,25 @@ public class Trial extends JPanel implements ActionListener {
 		nonsenseOutcome = defaultResponseFile.next();
 
 		defaultResponseFile.close();
+		
+		// Load notes
+		Scanner notesFile;
+		
+		if (folder.equals(""))
+			notesFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/Notes.csv"));
+		else
+			notesFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Notes.csv"));
+		
+		notesFile.useDelimiter(",");
+		
+		// Clear notes
+		notes = new ArrayList<String>();
+		
+		while (notesFile.hasNext()) {
+			notes.add(notesFile.next());
+		}
+		
+		notesFile.close();
 	}
 
 	public void submitResponse(String response) {
@@ -220,7 +242,6 @@ public class Trial extends JPanel implements ActionListener {
 	public void proceed() {
 
 		// Check if the trial has ended
-
 		switch (dialog.get(part + 1)) {
 
 		// Won case
@@ -253,6 +274,9 @@ public class Trial extends JPanel implements ActionListener {
 			enableInput();
 
 			// Add notes
+			for (String note : notes) {
+				trialCase.getNotes().add(note);
+			}
 		}
 
 
@@ -272,7 +296,6 @@ public class Trial extends JPanel implements ActionListener {
 	private boolean profanityCheck(String[] response) {
 
 		// Check for profanities
-		// TODO: There is still a lot more (boy this is fun)
 		ArrayList<String> profanities = new ArrayList<String>();
 		profanities.add("fuck");
 		profanities.add("fucking");
