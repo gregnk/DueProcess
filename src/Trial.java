@@ -173,7 +173,7 @@ public class Trial extends JPanel implements ActionListener {
 		// Check if the user entered something
 		if (!response.equals("")) {
 
-			if (profanityCheck(response))
+			if (profanityCheck(response.split(" ")))
 				return;
 
 			// Generate the score for each outcome
