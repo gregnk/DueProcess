@@ -5,6 +5,7 @@ public class SaveFile {
 	private final static String SAVE_PATH = "data/save/";
 	private final static String GAME_SAVE_FILE = "Game.csv";
 	private final static String LOGS_SAVE_FILE = "Logs.csv";
+	private final static String WITNESSES_SAVE_FILE = "Witnesses.csv";
 	private final static String EVIDENCE_SAVE_FILE = "Evedence.csv";
 	private final static String PROFILE_SAVE_FILE = "Profile.csv";
 	
@@ -16,6 +17,14 @@ public class SaveFile {
 		
 		//saveFile.format("%s,", game.getUserProfile().getFirstName());
 		//saveFile.format("%s,", game.getUserProfile().getLastName());
+		saveFile.format("%d,", game.getUserProfile().getLevel());
+		
+		for (String casePlayed : game.getUserProfile().getCasesPlayed())
+			saveFile.format("%s,", casePlayed);
+		
+		saveFile.close();
+		
+		saveFile = new Formatter(new File(SAVE_PATH + LOGS_SAVE_FILE));
 		
 		
 		saveFile.close();

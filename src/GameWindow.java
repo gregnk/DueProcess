@@ -174,7 +174,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	}
 
 	public void win() {
-
+		
 	}
 
 	public void gameOver() {
@@ -182,6 +182,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	}
 
 	public void loadNextCase() throws FileNotFoundException {
+		userProfile.getCasesPlayed().add(currentCase.getCaseName());
 		caseNo++;
 		loadCase();
 	}
