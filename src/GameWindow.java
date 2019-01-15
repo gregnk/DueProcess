@@ -185,6 +185,11 @@ public class GameWindow extends JFrame implements ActionListener {
 
 	}
 
+	public void loadNextCase() throws FileNotFoundException {
+		caseNo++;
+		loadCase();
+	}
+	
 	public void loadCase() throws FileNotFoundException {
 		// Reset current case class
 		currentCase = new Case();

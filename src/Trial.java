@@ -208,6 +208,29 @@ public class Trial extends JPanel implements ActionListener {
 	}
 
 	public void proceed() {
+		
+		// Check if the trial has ended
+		
+		switch (dialog.get(part + 1)) {
+		
+		// Won case
+		case "__WIN":
+			try {
+				window.loadNextCase();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			break;
+		
+		// Won final case (end of game)
+		case "__WIN_FINAL":
+			window.win();
+			
+		// Lost case
+		case "__LOSE":
+			window.gameOver();
+			break;
+		}
 		// Display the next part of the dialog
 		log.setText(log.getText() + dialog.get(++part) + "<br>");
 
@@ -220,6 +243,7 @@ public class Trial extends JPanel implements ActionListener {
 			// Add notes
 		}
 
+		
 		repaint();
 	}
 
