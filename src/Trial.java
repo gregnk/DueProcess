@@ -25,10 +25,8 @@ public class Trial extends JPanel implements ActionListener {
 	// Score thresholds
 	private double scoreThreshold;
 
-	// Default responses
-	private String emptyResponse;
-	private String profaneResponse;
-	private String nonsenseResponse;
+	// Default outcomes
+	private String nonsenseOutcome;
 
 	// Proceed/Submit response button
 	private JButton proceedButton = new JButton("Continue");
@@ -89,9 +87,12 @@ public class Trial extends JPanel implements ActionListener {
 		part = 0;
 
 		// Load dialog into the array
-		while(dialogFile.hasNext())
-			dialog.add(dialogFile.next());
+		while(dialogFile.hasNext()) {
+			String text = dialogFile.next();
 
+			dialog.add(text);
+
+		}
 		dialogFile.close();
 
 		// Add the first part of the dialog to the JLabel
@@ -153,17 +154,14 @@ public class Trial extends JPanel implements ActionListener {
 		Scanner defaultResponseFile;
 
 		if (folder.equals(""))
-			defaultResponseFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/DefaultResponse.csv"));
+			defaultResponseFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/DefaultOutcomes.csv"));
 		else
-			defaultResponseFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/DefaultResponse.csv"));
+			defaultResponseFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/DefaultOutcomes.csv"));
 
 		defaultResponseFile.useDelimiter(",");
 
-		// Profane response (The user entered profanity into to their response)
-		profaneResponse = defaultResponseFile.next();
-
-		// Nonsense response (What the user entered did reach the score threshold and therefore did not make any sense)
-		nonsenseResponse = defaultResponseFile.next();
+		// Nonsense outcome (What the user entered did reach the score threshold and therefore did not make any sense)
+		nonsenseOutcome = defaultResponseFile.next();
 
 		defaultResponseFile.close();
 	}
@@ -174,15 +172,15 @@ public class Trial extends JPanel implements ActionListener {
 		if (!response.equals("")) {
 
 			// Currently disabled as it might interfere with the case
-			// Lawyers are not supposed to say stuff like "If you look at the fucking video footage" but there may be evidence
-			// but yet again it might be part of a qoute in the evidence or something like that
+			// Lawyers are not supposed to say stuff like "If you look at the fucking video footage"
+			// but yet again it might be part of a quote in the evidence or something like that
 			// Idk
-			
-//			if (profanityCheck(response.split(" "))) {
-//				log.setText(log.getText() + "" + profaneResponse + "<br>");
-//				return;
-//			}
-			
+
+			//			if (profanityCheck(response.split(" "))) {
+			//				log.setText(log.getText() + "" + profaneResponse + "<br>");
+			//				return;
+			//			}
+
 			// Generate the score for each outcome
 			for (Outcome outcome : outcomes) {
 				double score = 0;
@@ -200,24 +198,31 @@ public class Trial extends JPanel implements ActionListener {
 				System.out.println(outcome.toString());
 			}
 
-			// Load the outcome with the highest score
-			try {
-				loadDialog(outcomes.get(0).getNextDialog());
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			// Check if the highest outcome meets the threshold
+			if (outcomes.get(0).getScore() < scoreThreshold) {
+				log.setText(log.getText() + nonsenseOutcome + "<br>");
 			}
 
-			// Disable user input
-			disableInput();
+			else {
+				// Load the outcome with the highest score
+				try {
+					loadDialog(outcomes.get(0).getNextDialog());
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+
+				// Disable user input
+				disableInput();
+			}
 		}
 	}
 
 	public void proceed() {
-		
+
 		// Check if the trial has ended
-		
+
 		switch (dialog.get(part + 1)) {
-		
+
 		// Won case
 		case "__WIN":
 			try {
@@ -226,16 +231,17 @@ public class Trial extends JPanel implements ActionListener {
 				e.printStackTrace();
 			}
 			break;
-		
-		// Won final case (end of game)
+
+			// Won final case (end of game)
 		case "__WIN_FINAL":
 			window.win();
-			
-		// Lost case
+
+			// Lost case
 		case "__LOSE":
 			window.gameOver();
 			break;
 		}
+
 		// Display the next part of the dialog
 		log.setText(log.getText() + dialog.get(++part) + "<br>");
 
@@ -248,7 +254,7 @@ public class Trial extends JPanel implements ActionListener {
 			// Add notes
 		}
 
-		
+
 		repaint();
 	}
 
@@ -284,7 +290,7 @@ public class Trial extends JPanel implements ActionListener {
 					return true;
 			}
 		}
-		
+
 		return false;
 	}
 
