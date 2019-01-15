@@ -8,7 +8,8 @@ public class Notes extends JPanel implements ActionListener {
 	private ArrayList<JLabel> notesLabel = new ArrayList<JLabel>();
 	private ArrayList<JButton> deleteNoteButtons = new ArrayList<JButton>();
 	private ArrayList<String> notes;
-	private JTextField noteInput;
+	private JTextField noteInput = new JTextField();
+	private JButton addNoteButton = new JButton("Add note");
 	
 	private GameWindow window;
 	
@@ -32,6 +33,16 @@ public class Notes extends JPanel implements ActionListener {
 			
 			y += 20;
 		}
+		
+		// Add delete buttons
+		
+		// Add user input
+		noteInput.setBounds(10, 620, 650, 30);
+		add(noteInput);
+		
+		addNoteButton.setBounds(674, 620, 90, 30);
+		addNoteButton.addActionListener(this);
+		add(addNoteButton);
 	}
 	
 	public void addNote(String text) {
