@@ -35,7 +35,7 @@ public class MainMenu extends JPanel implements ActionListener {
 		add(continueButton);
 		
 		// How to play
-		howToPlayButton.setBounds(450, 200, 150, 100);
+		howToPlayButton.setBounds(310, 400, 150, 100);
 		howToPlayButton.addActionListener(this);
 		add(howToPlayButton);
 		
