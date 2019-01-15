@@ -108,7 +108,7 @@ public class GameWindow extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		switchScreen("Intro");
+		switchScreen("MainMenu");
 
 		setVisible(true);
 	}

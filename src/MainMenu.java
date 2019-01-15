@@ -66,7 +66,8 @@ public class MainMenu extends JPanel implements ActionListener {
 				e.printStackTrace();
 			}
 
-			window.switchScreen("EnterName");
+			//window.switchScreen("EnterName");
+			window.switchScreen("Intro");
 		}
 		
 		// Continue

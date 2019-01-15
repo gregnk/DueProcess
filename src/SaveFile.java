@@ -13,8 +13,9 @@ public class SaveFile {
 		
 		// Profile
 		saveFile = new Formatter(new File(SAVE_PATH + PROFILE_SAVE_FILE));
-		saveFile.format("%s,", game.getUserProfile().getFirstName());
-		saveFile.format("%s,", game.getUserProfile().getLastName());
+		
+		//saveFile.format("%s,", game.getUserProfile().getFirstName());
+		//saveFile.format("%s,", game.getUserProfile().getLastName());
 		
 		
 		saveFile.close();
@@ -27,8 +28,8 @@ public class SaveFile {
 		saveFile = new Scanner(new File(SAVE_PATH + PROFILE_SAVE_FILE));
 		saveFile.useDelimiter(",");
 		
-		game.getUserProfile().setFirstName(saveFile.next());
-		game.getUserProfile().setLastName(saveFile.next());
+		//game.getUserProfile().setFirstName(saveFile.next());
+		//game.getUserProfile().setLastName(saveFile.next());
 		
 		saveFile.close();
 	}
