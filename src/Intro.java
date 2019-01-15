@@ -45,7 +45,7 @@ public class Intro extends JPanel implements ActionListener {
 			
 			else {
 				window.displayMenuBar();
-				window.switchScreen("Trial");
+				window.switchScreen("Trial", true);
 			}
 		}
 
