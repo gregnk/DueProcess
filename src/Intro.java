@@ -19,12 +19,12 @@ public class Intro extends JPanel implements ActionListener {
 		this.window = window;
 		
 		// Intro text
-		textLabel = new JLabel(text.get(0));
-		textLabel.setBounds(340, 40, 1000, 20);
+		textLabel = new JLabel("<html><body style='width: 575px;text-align:center'>" + text.get(0) + "</body></html>");
+		textLabel.setBounds(0, 40, 755, 20);
 		add(textLabel);
 
 		// Continue button
-		continueButton.setBounds(325, 140, 100, 50);
+		continueButton.setBounds(326, 200, 100, 50);
 		continueButton.addActionListener(this);
 		add(continueButton);
 	}
@@ -36,7 +36,7 @@ public class Intro extends JPanel implements ActionListener {
 			
 			// Display the next part
 			if (part < text.size() - 1) {
-				textLabel.setText(text.get(++part));
+				textLabel.setText("<html><body style='width: 575px;text-align:center'>" + text.get(++part) + "</body></html>");
 				
 				if (part == text.size() - 1) {
 					continueButton.setText("Go to trial");
