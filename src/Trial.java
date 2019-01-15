@@ -235,6 +235,7 @@ public class Trial extends JPanel implements ActionListener {
 			// Won final case (end of game)
 		case "__WIN_FINAL":
 			window.win();
+			break;
 
 			// Lost case
 		case "__LOSE":
