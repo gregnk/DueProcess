@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Evidence {
 	private String name;
 	private String desc;
-	private ImageIcon icon;
+	private String image;
 	
 	public String getName() {
 		return name;
@@ -17,21 +17,22 @@ public class Evidence {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	public ImageIcon getIcon() {
-		return icon;
+	public String getImage() {
+		return image;
 	}
-	public void setIcon(ImageIcon icon) {
-		this.icon = icon;
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
-	public Evidence(String name, String desc, ImageIcon icon) {
+	public Evidence(String name, String desc, String image) {
+		super();
 		this.name = name;
 		this.desc = desc;
-		this.icon = icon;
+		this.image = image;
 	}
 	
 	@Override
 	public String toString() {
-		return "Evidence [name=" + name + ", desc=" + desc + ", icon=" + icon + "]";
-	}	
+		return "Evidence [name=" + name + ", desc=" + desc + ", image=" + image + "]";
+	}
 }

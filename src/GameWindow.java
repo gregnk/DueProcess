@@ -247,7 +247,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		ArrayList<Evidence> evidence = new ArrayList<Evidence>();
 
 		while (file.hasNext()) {
-			evidence.add(new Evidence(file.next(), file.next(), new ImageIcon("data/images/evidence/" + file.next())));
+			evidence.add(new Evidence(file.next(), file.next(), "data/images/" + file.next()));
 		}
 		
 		currentCase.setEvidence(evidence);
