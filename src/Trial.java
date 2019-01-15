@@ -173,10 +173,15 @@ public class Trial extends JPanel implements ActionListener {
 		// Check if the user entered something
 		if (!response.equals("")) {
 
-			if (profanityCheck(response.split(" "))) {
-				log.setText(log.getText() + "" + profaneResponse + "<br>");
-				return;
-			}
+			// Currently disabled as it might interfere with the case
+			// Lawyers are not supposed to say stuff like "If you look at the fucking video footage" but there may be evidence
+			// but yet again it might be part of a qoute in the evidence or something like that
+			// Idk
+			
+//			if (profanityCheck(response.split(" "))) {
+//				log.setText(log.getText() + "" + profaneResponse + "<br>");
+//				return;
+//			}
 			
 			// Generate the score for each outcome
 			for (Outcome outcome : outcomes) {
