@@ -43,6 +43,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	private JMenuItem saveItem = new JMenuItem("Save");
 	private JMenuItem loadItem = new JMenuItem("Load");
 	private JMenuItem quitItem = new JMenuItem("Quit to main menu");
+	private JMenuItem howToPlayItem = new JMenuItem("How to play");
 
 	private ArrayList<Law> laws;
 	private Case currentCase = new Case();
@@ -72,6 +73,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		gameMenu.add(saveItem);
 		gameMenu.add(loadItem);
 		gameMenu.add(quitItem);
+		gameMenu.add(howToPlayItem);
 
 		menuBar.add(caseMenu);
 		menuBar.add(gameMenu);
@@ -86,6 +88,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		saveItem.addActionListener(this);
 		loadItem.addActionListener(this);
 		quitItem.addActionListener(this);
+		howToPlayItem.addActionListener(this);
 
 		// Add and then hide menu bar
 		setJMenuBar(menuBar);
