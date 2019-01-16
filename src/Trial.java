@@ -83,7 +83,7 @@ public class Trial extends JPanel implements ActionListener {
 		else
 			dialogFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Dialog.csv"));
 
-		dialogFile.useDelimiter(",");
+		dialogFile.useDelimiter("`");
 
 		// Reset dialog array
 		dialog = new ArrayList<String>();
@@ -176,7 +176,7 @@ public class Trial extends JPanel implements ActionListener {
 		else
 			notesFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Notes.csv"));
 		
-		notesFile.useDelimiter(",");
+		notesFile.useDelimiter("`");
 		
 		// Clear notes
 		notes = new ArrayList<String>();

@@ -216,7 +216,7 @@ public class GameWindow extends JFrame implements ActionListener {
 
 		// Load intro
 		file = new Scanner(new File("data/cases/" + currentCase.getCaseName() + "/Intro.csv"));
-		file.useDelimiter(",");
+		file.useDelimiter("`");
 
 		ArrayList<String> introText = new ArrayList<String>();
 
@@ -241,7 +241,7 @@ public class GameWindow extends JFrame implements ActionListener {
 
 		// Load witnesses
 		file = new Scanner(new File("data/cases/" + currentCase.getCaseName() + "/Witnesses.csv"));
-		file.useDelimiter(",");
+		file.useDelimiter("`");
 
 		ArrayList<Witness> witnesses = new ArrayList<Witness>();
 
@@ -254,7 +254,7 @@ public class GameWindow extends JFrame implements ActionListener {
 
 		// Load evidence
 		file = new Scanner(new File("data/cases/" + currentCase.getCaseName() + "/Evidence.csv"));
-		file.useDelimiter(",");
+		file.useDelimiter("`");
 
 		ArrayList<Evidence> evidence = new ArrayList<Evidence>();
 
