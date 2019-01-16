@@ -161,6 +161,14 @@ public class GameWindow extends JFrame implements ActionListener {
 			if (reset || notesScreen == null) notesScreen = new Notes(currentCase.getNotes(), this);
 			currentScreen = notesScreen;
 			break;
+		case "HowToPlayM":
+			if (reset || howToPlayScreen == null) howToPlayScreen = new HowToPlay(this, true);
+			currentScreen = howToPlayScreen;
+			break;
+		case "HowToPlay":
+			if (reset || howToPlayScreen == null) howToPlayScreen = new HowToPlay(this, false);
+			currentScreen = howToPlayScreen;
+			break;
 		case "InputTest":
 			inputTest = new InputTest();
 			currentScreen = inputTest;
@@ -316,6 +324,10 @@ public class GameWindow extends JFrame implements ActionListener {
 			
 			if (confirm == JOptionPane.YES_OPTION)
 				switchScreen("MainMenu");
+		}
+		
+		if (evt.getSource() == howToPlayItem) {
+			switchScreen("HowToPlay");
 		}
 	}
 }

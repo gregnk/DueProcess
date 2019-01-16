@@ -85,5 +85,10 @@ public class MainMenu extends JPanel implements ActionListener {
 			
 			
 		}
+		
+		// How to play
+		if (evt.getSource() == howToPlayButton) {
+			window.switchScreen("HowToPlayM");
+		}
 	}
 }
