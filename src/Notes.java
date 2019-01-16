@@ -37,12 +37,12 @@ public class Notes extends JPanel implements ActionListener {
 		// Add delete buttons
 		
 		// Add user input
-		noteInput.setBounds(10, 620, 650, 30);
-		add(noteInput);
-		
-		addNoteButton.setBounds(674, 620, 90, 30);
-		addNoteButton.addActionListener(this);
-		add(addNoteButton);
+//		noteInput.setBounds(10, 620, 650, 30);
+//		add(noteInput);
+//		
+//		addNoteButton.setBounds(674, 620, 90, 30);
+//		addNoteButton.addActionListener(this);
+//		add(addNoteButton);
 	}
 	
 	public void addNote(String text) {
