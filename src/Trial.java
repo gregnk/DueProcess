@@ -22,6 +22,8 @@ public class Trial extends JPanel implements ActionListener {
 	// List of possible outcomes
 	private ArrayList<Outcome> outcomes = new ArrayList<Outcome>();
 
+	private ArrayList<String> sharedDialog = new ArrayList<String>();
+	
 	// Score threshold
 	private double scoreThreshold;
 
@@ -33,7 +35,7 @@ public class Trial extends JPanel implements ActionListener {
 	
 	// Proceed/Submit response button
 	private JButton proceedButton = new JButton("Continue");
-
+	
 	private Case trialCase;
 
 	private boolean canInput;
@@ -83,7 +85,7 @@ public class Trial extends JPanel implements ActionListener {
 		else
 			dialogFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Dialog.csv"));
 
-		dialogFile.useDelimiter("`");
+		dialogFile.useDelimiter(",");
 
 		// Reset dialog array
 		dialog = new ArrayList<String>();
@@ -176,7 +178,7 @@ public class Trial extends JPanel implements ActionListener {
 		else
 			notesFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Notes.csv"));
 		
-		notesFile.useDelimiter("`");
+		notesFile.useDelimiter(",");
 		
 		// Clear notes
 		notes = new ArrayList<String>();
