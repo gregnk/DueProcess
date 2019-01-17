@@ -68,8 +68,20 @@ public class Trial extends JPanel implements ActionListener {
 		proceedButton.addActionListener(this);
 		add(proceedButton);
 
+		// Load case dialog
 		try {
 			loadDialog("");
+			
+			// Load shared dialog
+			Scanner sharedDialogFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/SharedDialog.csv"));
+			sharedDialogFile.useDelimiter(",");
+			
+			while (sharedDialogFile.hasNext()) {
+				sharedDialog.add(sharedDialogFile.next());
+			}
+			
+			sharedDialogFile.close();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -95,6 +107,15 @@ public class Trial extends JPanel implements ActionListener {
 		while(dialogFile.hasNext()) {
 			String text = dialogFile.next();
 
+			text = text.replace("\r", "");
+			text = text.replace("\n", "");
+			
+			// Add shared text variable
+			System.out.println(text.substring(0, 3));
+			
+			if (text.substring(0, 3).equals("__S"))
+				text = sharedDialog.get(Integer.parseInt(text.substring(3)));
+				
 			dialog.add(text);
 
 		}
