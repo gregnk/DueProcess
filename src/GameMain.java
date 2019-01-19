@@ -8,8 +8,9 @@
  * Features: User input processing, 
  * Areas of concern: 
  * 	* Polymorhisim could have been used with the GUI classes
- * 	* The game framework took longer than expected to make, therefore the cases were rushed
  * 	* The "how to play" section is incomplete
+ * 	* There is absolutely no story whatsoever due to time constraints
+ * 	* The save and load function does not work
  */
 
 public class GameMain {

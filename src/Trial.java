@@ -23,7 +23,7 @@ public class Trial extends JPanel implements ActionListener {
 	private ArrayList<Outcome> outcomes = new ArrayList<Outcome>();
 
 	private ArrayList<String> sharedDialog = new ArrayList<String>();
-	
+
 	// Score threshold
 	private double scoreThreshold;
 
@@ -32,10 +32,10 @@ public class Trial extends JPanel implements ActionListener {
 
 	// Notes to be added at the end of the dialog
 	private ArrayList<String> notes;
-	
+
 	// Proceed/Submit response button
 	private JButton proceedButton = new JButton("Continue");
-	
+
 	private Case trialCase;
 
 	private boolean canInput;
@@ -70,18 +70,18 @@ public class Trial extends JPanel implements ActionListener {
 
 		// Load case dialog
 		try {
-			loadDialog("");
-			
 			// Load shared dialog
 			Scanner sharedDialogFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/SharedDialog.csv"));
 			sharedDialogFile.useDelimiter(",");
-			
+
 			while (sharedDialogFile.hasNext()) {
 				sharedDialog.add(sharedDialogFile.next());
 			}
-			
+
 			sharedDialogFile.close();
-			
+
+			loadDialog("");
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -109,13 +109,13 @@ public class Trial extends JPanel implements ActionListener {
 
 			text = text.replace("\r", "");
 			text = text.replace("\n", "");
-			
+
 			// Add shared text variable
-			System.out.println(text.substring(0, 3));
-			
+			System.out.println(text);
+
 			if (text.substring(0, 3).equals("__S"))
 				text = sharedDialog.get(Integer.parseInt(text.substring(3)));
-				
+
 			dialog.add(text);
 
 		}
@@ -190,24 +190,24 @@ public class Trial extends JPanel implements ActionListener {
 		nonsenseOutcome = defaultResponseFile.next();
 
 		defaultResponseFile.close();
-		
+
 		// Load notes
 		Scanner notesFile;
-		
+
 		if (folder.equals(""))
 			notesFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/Notes.csv"));
 		else
 			notesFile = new Scanner(new File("data/cases/" + trialCase.getCaseName() + "/dialog/" + folder + "/Notes.csv"));
-		
+
 		notesFile.useDelimiter(",");
-		
+
 		// Clear notes
 		notes = new ArrayList<String>();
-		
+
 		while (notesFile.hasNext()) {
 			notes.add(notesFile.next());
 		}
-		
+
 		notesFile.close();
 	}
 
@@ -228,7 +228,7 @@ public class Trial extends JPanel implements ActionListener {
 
 			// Add the response to the log
 			log.setText(log.getText() + response + "<br>");
-			
+
 			// Generate the score for each outcome
 			for (Outcome outcome : outcomes) {
 				double score = 0;
